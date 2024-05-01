@@ -22,6 +22,13 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/(afterLogin)/[username]/profile.module.ㅊㄴㄴ",
+    "src/app/(afterLogin)/[username]/_component/UserPosts.txs"
+  ],
   "exclude": ["node_modules"]
 }
