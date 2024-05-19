@@ -1,15 +1,32 @@
 import { faker } from '@faker-js/faker';
 import style from './chatRoom.module.css';
-import Link from 'next/link';
-import BackButton from '../../_component/BackButton';
-import cx from 'classnames';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { getUserServer } from '../../[username]/_lib/getUserServer';
+import { auth } from '@/auth';
+import MessageForm from './_component/MessageForm';
+import { UserInfo } from './_component/UserInfo';
+import WebSocketComponent from './_component/WebSocketComponents';
+import { QueryClient } from '@tanstack/react-query';
+import MessageList from './_component/MessageList';
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime);
 
-export default function ChatRoom() {
+type Props = {
+  params: { room: string };
+};
+
+export default async function ChatRoom({ params }: Props) {
+  const session = await auth();
+  const queryClient = new QueryClient();
+  const ids = params.room.split('-').filter((v) => v !== session?.user?.email);
+
+  if (!ids[0]) {
+    return null;
+  }
+  await queryClient.prefetchQuery({ queryKey: ['users', ids[0]], queryFn: getUserServer });
+
   const user = {
     id: 'hero',
     nickname: '영웅',
@@ -23,37 +40,10 @@ export default function ChatRoom() {
 
   return (
     <main className={style.main}>
-      <div className={style.header}>
-        <BackButton />
-        <div>
-          <h2>{user.nickname}</h2>
-        </div>
-      </div>
-      <Link href={user.nickname} className={style.userInfo}>
-        <img src={user.image} alt={user.id} />
-        <div>
-          <b>{user.nickname}</b>
-        </div>
-        <div>@{user.id}</div>
-      </Link>
-      <div className={style.list}>
-        {messages.map((m) => {
-          if (m.id === 'zerohch0') {
-            return (
-              <div key={m.messageId} className={cx(style.message, style.myMessage)}>
-                <div className={style.content}>{m.content}</div>
-                <div className={style.date}>{dayjs(m.createAt).format('YYYY년 MM월 DD일 A HH시 mm분')}</div>
-              </div>
-            );
-          }
-          return (
-            <div key={m.messageId} className={cx(style.message, style.yourMessage)}>
-              <div className={style.content}>{m.content}</div>
-              <div className={style.date}>{dayjs(m.createAt).format('YYYY년 MM월 DD일 A HH시 mm분')}</div>
-            </div>
-          );
-        })}
-      </div>
+      <WebSocketComponent />
+      <UserInfo id={ids[0]} />
+      <MessageList id={ids[0]} />
+      <MessageForm id={ids[0]} />
     </main>
   );
 }

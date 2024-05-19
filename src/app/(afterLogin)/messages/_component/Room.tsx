@@ -5,30 +5,30 @@ import style from '../message.module.css';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useRouter } from 'next/navigation';
+import { Room as Rooms } from '@/model/Room';
+import { useSession } from 'next-auth/react';
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime);
 
-export default function Room() {
+type Props = {
+  room: Rooms;
+};
+
+export default function Room({ room }: Props) {
+  const { data: session } = useSession();
   const router = useRouter();
 
-  const user = {
-    id: 'hero',
-    nickname: '영웅',
-    Messages: [
-      { roomId: 123, content: '안녕하세요', createAt: new Date() },
-      { roomId: 123, content: '안녕히 가세요', createAt: new Date() },
-    ],
+  const onClick = () => {
+    router.push(`/messages/${room.room}`);
   };
 
-  const onClick = () => {
-    router.push(`/messages/${user.Messages.at(-1)?.roomId}`);
-  };
+  const user = room.Receiver.id === session?.user?.email ? room.Sender : room.Receiver;
 
   return (
     <div className={style.room} onClickCapture={onClick}>
       <div className={style.roomUserImage}>
-        <img src={faker.image.avatar()} alt="" />
+        <img src={user.image} alt="" />
       </div>
       <div className={style.roomChatInfo}>
         <div className={style.roomUserInfo}>
@@ -36,9 +36,9 @@ export default function Room() {
           &nbsp;
           <span>@{user.id}</span>
           &nbsp;
-          <span className={style.postDate}>{dayjs(user.Messages?.at(-1)?.createAt).fromNow(true)}</span>
+          <span className={style.postDate}>{dayjs(room.createdAt).fromNow(true)}</span>
         </div>
-        <div className={style.roomLastChat}>{user.Messages?.at(-1)?.content}</div>
+        <div className={style.roomLastChat}>{room.content}</div>
       </div>
     </div>
   );

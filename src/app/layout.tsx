@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
+import './globalTheme.css';
 import AuthSession from './_component/AuthSession';
 import { MSWComponent } from './_component/MSWComponent';
 

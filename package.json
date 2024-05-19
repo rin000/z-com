@@ -13,6 +13,7 @@
     "@auth/core": "^0.27.0",
     "@faker-js/faker": "^8.3.1",
     "@tanstack/react-query": "^5.22.2",
+    "@vanilla-extract/css": "^1.15.1",
     "classnames": "^2.5.1",
     "cookie": "^0.6.0",
     "dayjs": "^1.11.10",
@@ -22,6 +23,7 @@
     "react-dom": "^18",
     "react-intersection-observer": "^9.8.1",
     "react-textarea-autosize": "^8.5.3",
+    "socket.io-client": "^4.7.5",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
@@ -32,6 +34,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vanilla-extract/next-plugin": "^2.4.0",
     "cors": "^2.8.5",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
