@@ -1,6 +1,6 @@
 'use client';
 
-import ReactTextareaAutosize from 'react-textarea-autosize';
+import TextareaAutosize from 'react-textarea-autosize';
 import style from './messageForm.module.css';
 import { ChangeEventHandler, FormEventHandler, useEffect, useState } from 'react';
 import useSocket from '../_lib/useSocket';
@@ -64,7 +64,10 @@ export default function MessageForm({ id }: Props) {
         content,
       });
       newMessage.pages[newMessage.pages.length - 1] = newLastPage;
-      queryClient.setQueryData(['rooms', { senderId: session?.user?.email, receiverId: id }, 'messages'], newMessage);
+      queryClient.setQueryData(
+        ['rooms', { senderId: session?.user?.email, receiverId: id }, 'messages'],
+        newMessage
+      );
       setGoDown(true);
     }
     setContent('');
@@ -73,7 +76,7 @@ export default function MessageForm({ id }: Props) {
   return (
     <div className={style.formZone}>
       <form className={style.form} onSubmit={onSubmit}>
-        <ReactTextareaAutosize value={content} onChange={onChangeContent} />
+        <TextareaAutosize value={content} onChange={onChangeContent} />
         <button className={style.submitButton} type="submit" disabled={!content}>
           <svg
             viewBox="0 0 24 24"

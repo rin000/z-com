@@ -11,20 +11,21 @@ import style from '../home.module.css';
 export default function PostRecommends() {
   // fetchNextPage: 스크롤 내려가면 불러오기, hasNextPage: 데이터 다 불러왔을경우 false로 바뀐다
   // isFetched: 데이터를 가져오는 순간, isPending: 데이터 가져오기 전
-  const { data, fetchNextPage, hasNextPage, isFetching, isPending, isLoading, isError } = useSuspenseInfiniteQuery<
-    IPost[],
-    Object,
-    InfiniteData<IPost[]>,
-    [_1: string, _2: string],
-    number
-  >({
-    queryKey: ['posts', 'recommends'],
-    queryFn: getPostRecommends,
-    initialPageParam: 0, // 페이지 5개씩 가져온다 (2차원 배열로 5개씩)
-    getNextPageParam: (lastPage) => lastPage.at(-1)?.postId, // 마지막 페이지 5개 불러온것 중 마지막 페이지
-    staleTime: 1000 * 60,
-    gcTime: 300 * 1000,
-  });
+  const { data, fetchNextPage, hasNextPage, isFetching, isPending, isLoading, isError } =
+    useSuspenseInfiniteQuery<
+      IPost[],
+      Object,
+      InfiniteData<IPost[]>,
+      [_1: string, _2: string],
+      number
+    >({
+      queryKey: ['posts', 'recommends'],
+      queryFn: getPostRecommends,
+      initialPageParam: 0, // 페이지 5개씩 가져온다 (2차원 배열로 5개씩)
+      getNextPageParam: (lastPage) => lastPage.at(-1)?.postId, // 마지막 페이지 5개 불러온것 중 마지막 페이지
+      staleTime: 1000 * 60,
+      gcTime: 300 * 1000,
+    });
   const { ref, inView } = useInView({
     threshold: 0, // 보이면 호출
     delay: 0,

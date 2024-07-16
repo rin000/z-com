@@ -5,15 +5,16 @@ import * as styles from '@/app/(beforeLogin)/_component/login.css';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
-// 폴더 앞에 _(언더바)를 붙이면 프라이빗 폴더가 된다, 프라이빗 폴더는 폴더 정리용.
-// 괄호()는 그룹폴더, 역할은 Layout.tsx을 두는것.
+// 폴더 앞에 _(언더바)를 붙이면 프라이빗 폴더가 된다. 프라이빗 폴더는 폴더 정리용.
+// 괄호()는 그룹폴더
 
 // 패러랠 라우트 = @modal, 한개의 화면에 두개의 페이지를 동시에 보여준다.
-// 패러랠 라우트는 layout.tsx의 {modal}이 실행된다
+// 패러랠 라우트는 layout.tsx의 {modal}이 실행된다.
 
 // (.)i = 인터셉트 라우팅
 // 새로고침할 때 i가 실행된다
-// (beforeLogin)의 i가 (.)i로 대체된다(인터셉트 라우팅)
+// 링크 클릭할 때 (beforeLogin)의 i가 (.)i로 대체된다(인터셉트 라우팅)
+
 export default function Page() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -76,7 +77,14 @@ export default function Page() {
               <label id="id" className={styles.inputLabel} htmlFor="id">
                 아이디
               </label>
-              <input id="id" className={styles.input} value={id} onChange={onChangeId} type="text" placeholder="" />
+              <input
+                id="id"
+                className={styles.input}
+                value={id}
+                onChange={onChangeId}
+                type="text"
+                placeholder=""
+              />
             </div>
             <div className={styles.inputDiv}>
               <label id="password" className={styles.inputLabel} htmlFor="password">

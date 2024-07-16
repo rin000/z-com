@@ -250,7 +250,9 @@ export default function TweetModal() {
             <div className={style.inputDiv}>
               <TextareaAutosize
                 className={style.input}
-                placeholder={modalStore.mode === 'comment' ? '답글 게시하기' : '무슨 일이 일어나고 있나요?'}
+                placeholder={
+                  modalStore.mode === 'comment' ? '답글 게시하기' : '무슨 일이 일어나고 있나요?'
+                }
                 value={content}
                 onChange={onChange}
               />
@@ -274,7 +276,14 @@ export default function TweetModal() {
             <div className={style.modalDivider} />
             <div className={style.footerButtons}>
               <div className={style.footerButtonLeft}>
-                <input type="file" name="imageFiles" multiple hidden ref={imageRef} onChange={onUpload} />
+                <input
+                  type="file"
+                  name="imageFiles"
+                  multiple
+                  hidden
+                  ref={imageRef}
+                  onChange={onUpload}
+                />
                 <button className={style.uploadButton} type="button" onClick={onClickButton}>
                   <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
                     <g>

@@ -3,7 +3,6 @@ import style from './singlePost.module.css';
 import CommentForm from './_component/CommentForm';
 import SinglePost from './_component/SinglePost';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
-import { getSinglePost } from './_lib/getSinglePost';
 import { getComments } from './_lib/getComments';
 import Comments from './_component/Comments';
 import { User } from '@/model/User';
