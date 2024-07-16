@@ -117,7 +117,11 @@ export default function PostForm({ me }: Props) {
         </div>
       </div>
       <div className={style.postInputSection}>
-        <TextareaAutosize value={content} onChange={onChange} placeholder="무슨 일이 일어나고 있나요?" />
+        <TextareaAutosize
+          value={content}
+          onChange={onChange}
+          placeholder="무슨 일이 일어나고 있나요?"
+        />
         <div style={{ display: 'flex' }}>
           {preview.map(
             (v, index) =>
@@ -136,7 +140,14 @@ export default function PostForm({ me }: Props) {
         <div className={style.postButtonSection}>
           <div className={style.footerButtons}>
             <div className={style.footerButtonLeft}>
-              <input type="file" name="imageFiles" multiple hidden ref={imageRef} onChange={onUpload} />
+              <input
+                type="file"
+                name="imageFiles"
+                multiple
+                hidden
+                ref={imageRef}
+                onChange={onUpload}
+              />
               <button className={style.uploadButton} type="button" onClick={onClickButton}>
                 <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
                   <g>

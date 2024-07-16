@@ -263,7 +263,10 @@ export default function UserInfo({ username, session }: Props) {
                   </g>
                 </svg>
               </button>
-              <button onClick={onFollow} className={cx(style.followButton, followed && style.followed)}>
+              <button
+                onClick={onFollow}
+                className={cx(style.followButton, followed && style.followed)}
+              >
                 {followed ? '팔로잉' : '팔로우'}
               </button>
             </>
