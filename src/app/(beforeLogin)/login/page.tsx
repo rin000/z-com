@@ -2,6 +2,7 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import RedirectToLogin from '@/app/(beforeLogin)/login/_component/RedirectToLogin';
 import Main from '../_component/main';
+import React from 'react';
 
 export default async function Login() {
   const session = await auth();

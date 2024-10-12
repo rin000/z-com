@@ -1,6 +1,9 @@
 import { Message } from '@/model/Message';
 
-type Props = { pageParam?: number; queryKey: [string, { senderId: string; receiverId: string }, string] };
+type Props = {
+  pageParam?: number;
+  queryKey: [string, { senderId: string; receiverId: string }, string];
+};
 
 export async function getMessages({ pageParam, queryKey }: Props) {
   const [_, userInfo] = queryKey;
@@ -10,8 +13,8 @@ export async function getMessages({ pageParam, queryKey }: Props) {
       next: {
         tags: ['rooms'],
       },
-      credentials: 'include',
       cache: 'no-store',
+      credentials: 'include',
     }
   );
 

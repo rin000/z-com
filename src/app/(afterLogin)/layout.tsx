@@ -32,7 +32,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
                 </div>
               </Link>
               {session?.user && (
-                <>
+                <div>
                   <nav>
                     <ul>
                       <NavMenu />
@@ -52,7 +52,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
                     </Link>
                   </nav>
                   <LogoutButton me={session} />
-                </>
+                </div>
               )}
             </div>
           </section>

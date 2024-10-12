@@ -1,4 +1,9 @@
-import { assignVars, createGlobalTheme, createGlobalThemeContract, globalStyle } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createGlobalTheme,
+  createGlobalThemeContract,
+  globalStyle,
+} from '@vanilla-extract/css';
 
 export const global = createGlobalThemeContract({
   background: {

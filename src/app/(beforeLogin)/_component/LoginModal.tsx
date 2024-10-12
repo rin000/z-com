@@ -69,12 +69,12 @@ export default function Page() {
               </g>
             </svg>
           </button>
-          <div>로그인 하세요.</div>
+          <div>로그인 하세요</div>
         </div>
         <form onSubmit={onSubmit}>
           <div className={styles.modalBody}>
             <div className={styles.inputDiv}>
-              <label id="id" className={styles.inputLabel} htmlFor="id">
+              <label className={styles.inputLabel} htmlFor="id">
                 아이디
               </label>
               <input
@@ -87,7 +87,7 @@ export default function Page() {
               />
             </div>
             <div className={styles.inputDiv}>
-              <label id="password" className={styles.inputLabel} htmlFor="password">
+              <label className={styles.inputLabel} htmlFor="password">
                 비밀번호
               </label>
               <input

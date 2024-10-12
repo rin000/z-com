@@ -1,5 +1,4 @@
 .main {
-  width: 600px;
   border-color: rgb(239, 243, 244);
   border-right-width: 1px;
   border-left-width: 1px;
@@ -8,6 +7,17 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  min-height: 100%;
+}
+@media all and (min-width: 687px) {
+  .main {
+    width: 600px;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .main {
+    border-color: rgb(47, 51, 54);
+  }
 }
 
 .header {
@@ -28,6 +38,11 @@
   border-bottom: 1px solid rgb(239, 243, 244);
   padding: 12px 16px;
   align-items: flex-start;
+}
+@media (prefers-color-scheme: dark) {
+  .userZone {
+    border-color: rgb(47, 51, 54);
+  }
 }
 
 .userRow {
@@ -91,17 +106,11 @@
 .followButton.followed:hover {
   background: lightgray;
 }
-
 .messageButton {
   border: 1px solid rgb(207, 217, 222);
-  padding: 0 16px;
-  border-radius: 17px;
-  -webkit-border-radius: 17px;
-  -moz-border-radius: 17px;
-  -ms-border-radius: 17px;
-  -o-border-radius: 17px;
-  height: 34px;
   width: 34px;
+  border-radius: 17px;
+  height: 34px;
   background-color: white;
   display: flex;
   align-items: center;
@@ -113,11 +122,10 @@
 .messageButton:hover {
   background-color: rgb(15, 20, 25, 0.09);
 }
-
 .backButton {
   width: 34px;
   height: 34px;
-  background-color: #fff;
+  background-color: rgb(var(--background-end-rgb));
   border: none;
   border-radius: 17px;
   display: flex;
@@ -127,4 +135,9 @@
 }
 .backButton:hover {
   background-color: rgba(15, 20, 25, 0.1);
+}
+@media (prefers-color-scheme: dark) {
+  .backButton svg {
+    fill: white;
+  }
 }

@@ -46,6 +46,7 @@ export default function LogoutButton({ me }: Props) {
         <div>{me.user?.name}</div>
         <div>@{me.user?.email}</div>
       </div>
+      <div className={style.logOutText}>LogOut</div>
     </button>
   );
 }

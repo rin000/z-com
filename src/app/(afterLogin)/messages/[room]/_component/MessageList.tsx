@@ -1,7 +1,12 @@
 'use client';
 
 import style from '@/app/(afterLogin)/messages/[room]/chatRoom.module.css';
-import { DefaultError, InfiniteData, useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  DefaultError,
+  InfiniteData,
+  useInfiniteQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import cx from 'classnames';
 import dayjs from 'dayjs';
 import { useSession } from 'next-auth/react';
@@ -108,7 +113,10 @@ export default function MessageList({ id }: Props) {
 
         newLastPage.push(data);
         newMessage.pages[newMessage.pages.length - 1] = newLastPage;
-        queryClient.setQueryData(['rooms', { senderId: session?.user?.email, receiverId: id }, 'messages'], newMessage);
+        queryClient.setQueryData(
+          ['rooms', { senderId: session?.user?.email, receiverId: id }, 'messages'],
+          newMessage
+        );
         setGoDown(true);
       }
     });
@@ -120,7 +128,9 @@ export default function MessageList({ id }: Props) {
 
   return (
     <div className={style.list} ref={listRef}>
-      {!adjustingScroll && pageRendered && <div ref={ref} style={{ height: 1, background: 'yellow' }} />}
+      {!adjustingScroll && pageRendered && (
+        <div ref={ref} style={{ height: 1, background: 'yellow' }} />
+      )}
       {messages?.pages.map((page) =>
         page.map((m) => {
           if (m.senderId === session?.user?.email) {
@@ -128,14 +138,18 @@ export default function MessageList({ id }: Props) {
             return (
               <div key={m.messageId} className={cx(style.message, style.myMessage)}>
                 <div className={style.content}>{m.content}</div>
-                <div className={style.date}>{dayjs(m.createdAt).format('YYYY년 MM월 DD일 A HH시 mm분')}</div>
+                <div className={style.date}>
+                  {dayjs(m.createdAt).format('YYYY년 MM월 DD일 A HH시 mm분')}
+                </div>
               </div>
             );
           }
           return (
             <div key={m.messageId} className={cx(style.message, style.yourMessage)}>
               <div className={style.content}>{m.content}</div>
-              <div className={style.date}>{dayjs(m.createdAt).format('YYYY년 MM월 DD일 A HH시 mm분')}</div>
+              <div className={style.date}>
+                {dayjs(m.createdAt).format('YYYY년 MM월 DD일 A HH시 mm분')}
+              </div>
             </div>
           );
         })

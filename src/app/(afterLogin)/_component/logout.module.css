@@ -21,6 +21,16 @@
   width: 40px;
   border-radius: 50%;
 }
+.logOutText {
+  width: inherit;
+  display: flex;
+  justify-content: flex-end;
+  padding: 30px;
+  font-size: 14px;
+}
+.logOutButton:hover {
+  font-weight: bold;
+}
 
 @media all and (min-width: 1300px) {
   .logOutButton {

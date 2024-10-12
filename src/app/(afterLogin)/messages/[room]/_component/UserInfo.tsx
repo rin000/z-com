@@ -5,6 +5,7 @@ import style from '../chatRoom.module.css';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { getUser } from '@/app/(afterLogin)/[username]/_lib/getUser';
+import React from 'react';
 
 interface Props {
   id: string;

@@ -6,9 +6,9 @@ export async function getRooms(id: string) {
     next: {
       tags: ['rooms'],
     },
+    cache: 'no-store',
     credentials: 'include',
     headers: { Cookie: cookies().toString() },
-    cache: 'no-store',
   });
 
   if (!res.ok) {

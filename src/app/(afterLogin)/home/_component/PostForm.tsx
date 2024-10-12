@@ -10,7 +10,6 @@ import { Post } from '@/model/Post';
 type Props = {
   me: Session | null;
 };
-
 export default function PostForm({ me }: Props) {
   const imageRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<Array<{ dataUrl: string; file: File } | null>>([]);
@@ -23,22 +22,18 @@ export default function PostForm({ me }: Props) {
       const formData = new FormData();
       formData.append('content', content);
       preview.forEach((p) => {
-        p && formData.append('images', p?.file);
+        p && formData.append('images', p.file);
       });
-
       return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
         method: 'post',
         credentials: 'include',
         body: formData,
       });
     },
-    // response: 응답, variable: mutationFn(e: FormEvent), context: onMutate의 리턴 값
-    async onSuccess(response, variable, context) {
+    async onSuccess(response, variable) {
       const newPost = await response.json();
-
       setContent('');
       setPreview([]);
-
       if (queryClient.getQueryData(['posts', 'recommends'])) {
         queryClient.setQueryData(['posts', 'recommends'], (prevData: { pages: Post[][] }) => {
           const shallow = {
@@ -47,11 +42,9 @@ export default function PostForm({ me }: Props) {
           };
           shallow.pages[0] = [...shallow.pages[0]];
           shallow.pages[0].unshift(newPost);
-
           return shallow;
         });
       }
-
       if (queryClient.getQueryData(['posts', 'followings'])) {
         queryClient.setQueryData(['posts', 'followings'], (prevData: { pages: Post[][] }) => {
           const shallow = {
@@ -60,10 +53,12 @@ export default function PostForm({ me }: Props) {
           };
           shallow.pages[0] = [...shallow.pages[0]];
           shallow.pages[0].unshift(newPost);
-
           return shallow;
         });
       }
+      await queryClient.invalidateQueries({
+        queryKey: ['trends'],
+      });
     },
     onError(error) {
       console.error(error);
@@ -79,6 +74,14 @@ export default function PostForm({ me }: Props) {
     imageRef.current?.click();
   };
 
+  const onRemoveImage = (index: number) => () => {
+    setPreview((prevPreview) => {
+      const prev = [...prevPreview];
+      prev[index] = null;
+      return prev;
+    });
+  };
+
   const onUpload: ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
     if (e.target.files) {
@@ -91,22 +94,12 @@ export default function PostForm({ me }: Props) {
               dataUrl: reader.result as string,
               file,
             };
-
             return prev;
           });
         };
         reader.readAsDataURL(file);
       });
     }
-  };
-
-  const onRemoveImage = (index: number) => () => {
-    setPreview((prevPreview) => {
-      const prev = [...prevPreview];
-      prev[index] = null;
-
-      return prev;
-    });
   };
 
   return (
@@ -126,13 +119,12 @@ export default function PostForm({ me }: Props) {
           {preview.map(
             (v, index) =>
               v && (
-                <div style={{ flex: 1 }} key={index} onClick={onRemoveImage(index)}>
+                <div key={index} style={{ flex: 1 }} onClick={onRemoveImage(index)}>
                   <img
-                    style={{ width: '100%', objectFit: 'contain', maxHeight: '100' }}
-                    key={index}
                     src={v.dataUrl}
                     alt="미리보기"
-                  />{' '}
+                    style={{ width: '100%', objectFit: 'contain', maxHeight: 100 }}
+                  />
                 </div>
               )
           )}

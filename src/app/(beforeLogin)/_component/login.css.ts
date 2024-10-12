@@ -6,6 +6,7 @@ export const modalBackground = style({
   height: '100%',
   display: 'flex',
   justifyContent: 'center',
+  border: '1px solid gray',
   position: 'absolute',
   top: 0,
   left: 0,

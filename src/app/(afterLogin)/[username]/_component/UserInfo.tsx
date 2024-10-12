@@ -183,7 +183,7 @@ export default function UserInfo({ username, session }: Props) {
 
   if (error) {
     return (
-      <>
+      <div>
         <div className={style.header}>
           <BackButton />
           <h3 className={style.headerTitle}>프로필</h3>
@@ -207,7 +207,7 @@ export default function UserInfo({ username, session }: Props) {
         >
           계정이 존재하지 않음
         </div>
-      </>
+      </div>
     );
   }
 
@@ -235,7 +235,7 @@ export default function UserInfo({ username, session }: Props) {
   };
 
   return (
-    <>
+    <div>
       <div className={style.header}>
         <BackButton />
         <h3 className={style.headerTitle}>{user.nickname}</h3>
@@ -250,7 +250,7 @@ export default function UserInfo({ username, session }: Props) {
             <div>{user.id}</div>
           </div>
           {user.id !== session?.user?.email && (
-            <>
+            <div style={{ display: 'flex' }}>
               <button onClick={onMessage} className={style.messageButton}>
                 <svg
                   viewBox="0 0 24 24"
@@ -269,7 +269,7 @@ export default function UserInfo({ username, session }: Props) {
               >
                 {followed ? '팔로잉' : '팔로우'}
               </button>
-            </>
+            </div>
           )}
         </div>
         <div className={style.userFollower}>
@@ -278,6 +278,6 @@ export default function UserInfo({ username, session }: Props) {
           <div>{user._count.Followings} 팔로우 중</div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

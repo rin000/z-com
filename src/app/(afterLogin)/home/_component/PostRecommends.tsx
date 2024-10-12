@@ -4,7 +4,7 @@ import { InfiniteData, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { getPostRecommends } from '../_lib/getPostRecommends';
 import { Post as IPost } from '@/model/Post';
 import Post from '@/app/(afterLogin)/_component/Post';
-import { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import style from '../home.module.css';
 

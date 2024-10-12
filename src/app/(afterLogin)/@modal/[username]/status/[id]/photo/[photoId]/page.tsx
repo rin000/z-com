@@ -1,6 +1,4 @@
-import Post from '@/app/(afterLogin)/_component/Post';
 import CommentForm from '@/app/(afterLogin)/[username]/status/[id]/_component/CommentForm';
-import ActionButtons from '@/app/(afterLogin)/_component/ActionButtons';
 import style from './photoModal.module.css';
 import { faker } from '@faker-js/faker';
 import PhotoModalCloseButton from './_component/PhotoModalCloseButton';

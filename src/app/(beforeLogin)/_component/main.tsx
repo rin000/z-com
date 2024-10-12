@@ -2,6 +2,7 @@ import Image from 'next/image';
 import * as styles from '@/app/(beforeLogin)/_component/main.css';
 import zLogo from '../../../../public/zlogo.png';
 import Link from 'next/link';
+import React from 'react';
 
 export default function Main() {
   return (

@@ -38,7 +38,10 @@ export default async function Profile({ params }: Props) {
   const session = await auth();
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({ queryKey: ['users', username], queryFn: getUserServer });
-  await queryClient.prefetchQuery({ queryKey: ['posts', 'users', username], queryFn: getUserPosts });
+  await queryClient.prefetchQuery({
+    queryKey: ['posts', 'users', username],
+    queryFn: getUserPosts,
+  });
   const dehydratedState = dehydrate(queryClient);
 
   return (

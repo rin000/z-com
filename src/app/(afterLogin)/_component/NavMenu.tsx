@@ -4,9 +4,10 @@ import style from './navMenu.module.css';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import React from 'react';
 
 export default function NavMenu() {
-  // useSelectedLayoutSegment -> 자식 폴더
+  // useSelectedLayoutSegment -> 자식 폴더 한개
   // useSelectedLayoutSegments -> 자식 폴더 전체
   const segment = useSelectedLayoutSegment();
   const { data: me } = useSession();
