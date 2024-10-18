@@ -3,7 +3,7 @@ const withVanillaExtract = createVanillaExtractPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'export' /* 있으면 static 모드, 없으면 dynamic 모드 */,
+  // output: 'export', // 있으면 static 모드, 없으면 dynamic 모드
   async rewrites() {
     return [
       {
@@ -11,6 +11,9 @@ const nextConfig = {
         destination: `${process.env.NEXT_PUBLIC_BASE_URL}/upload/:slug`,
       },
     ];
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
   },
 };
 
