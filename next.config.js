@@ -3,6 +3,7 @@ const withVanillaExtract = createVanillaExtractPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // output: 'export' /* 있으면 static 모드, 없으면 dynamic 모드 */,
   async rewrites() {
     return [
       {

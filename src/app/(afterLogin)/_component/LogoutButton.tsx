@@ -1,6 +1,6 @@
 'use client';
 
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import style from './logout.module.css';
 import { useRouter } from 'next/navigation';
 import { Session } from '@auth/core/types';

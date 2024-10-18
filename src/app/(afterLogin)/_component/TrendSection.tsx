@@ -5,7 +5,6 @@ import Trend from './Trend';
 import style from './TrendSection.module.css';
 import { useSession } from 'next-auth/react';
 import { useQuery } from '@tanstack/react-query';
-import { Post as IPost } from '@/model/Post';
 import { getTrends } from '../_lib/getTrends';
 import { Hashtag } from '@/model/Hashtag';
 
