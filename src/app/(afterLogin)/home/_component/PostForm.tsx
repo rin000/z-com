@@ -1,6 +1,13 @@
 'use client';
 
-import { ChangeEventHandler, FormEvent, FormEventHandler, useRef, useState } from 'react';
+import {
+  ChangeEventHandler,
+  FormEvent,
+  FormEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import style from './postForm.module.css';
 import { Session } from '@auth/core/types';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -14,6 +21,8 @@ export default function PostForm({ me }: Props) {
   const imageRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<Array<{ dataUrl: string; file: File } | null>>([]);
   const [content, setContent] = useState('');
+  const [isClient, setIsClient] = useState(false);
+
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -102,6 +111,10 @@ export default function PostForm({ me }: Props) {
     }
   };
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <form className={style.postForm} onSubmit={mutation.mutate}>
       <div className={style.postUserSection}>
@@ -110,11 +123,13 @@ export default function PostForm({ me }: Props) {
         </div>
       </div>
       <div className={style.postInputSection}>
-        <TextareaAutosize
-          value={content}
-          onChange={onChange}
-          placeholder="무슨 일이 일어나고 있나요?"
-        />
+        {isClient ? (
+          <TextareaAutosize
+            value={content}
+            onChange={onChange}
+            placeholder="무슨 일이 일어나고 있나요?"
+          />
+        ) : null}
         <div style={{ display: 'flex' }}>
           {preview.map(
             (v, index) =>
